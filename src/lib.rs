@@ -71,15 +71,16 @@ impl Universe {
     }
 
     pub fn new() -> Universe {
+        const MIN: f64 = 0.0;
+        const MAX: f64 = 2.0;
         let width = 64;
         let height = 64;
 
         let cells = (0..width * height)
-          .map(|i| {
-              if i % 2 == 0 || i % 7 == 0 {
-                  Cell::Alive
-              } else {
-                  Cell::Dead
+          .map(|_i| {
+              match (random() * (MAX - MIN) + MIN) as i8 {
+                  0 => Cell::Dead,
+                  _ => Cell::Alive,
               }
           })
           .collect();
